@@ -1,9 +1,13 @@
+//Query Selectors
 const holes = document.querySelectorAll('.hole');
 const moles = document.querySelectorAll('.mole');
 const startButton = document.querySelector('#start');
-// TODO: Add the missing query selectors:
 const score = document.querySelector('#score'); // Use querySelector() to get the score element
 const timerDisplay = document.querySelector("#timer"); // use querySelector() to get the timer element.
+
+//Audio Files
+const audioHit = new Audio("https://github.com/gabrielsanchez/erddiagram/blob/main/hit.mp3?raw=true");
+const song = new Audio("https://github.com/gabrielsanchez/erddiagram/blob/main/molesong.mp3?raw=true");
 
 let time = 10;
 let timer;
@@ -25,6 +29,40 @@ function randomInteger(min, max) {
 }
 
 /**
+ * Play Audio Object during GamePlay
+ *
+ * The function takes in an audio Object
+ * and calls to play this object. 
+ *
+ */
+function playAudio(audioObject) {
+  audioObject.play();
+}
+
+/**
+ * Loops Audio Object
+ *
+ * The function takes in an audio object and  
+ * sets loop to true and then calls to play the audio. 
+ *
+ */
+function loopAudio(audioObject) {
+  audioObject.loop = true;
+  playAudio(audioObject);
+}
+
+/**
+ * Stops Audio 
+ *
+ * The function takes in an audio object and
+ * calls to pause the audio object.
+ *
+ */
+function stopAudio(audioObject) {
+  audioObject.pause();
+}
+
+/**
  * Sets the time delay given a difficulty parameter.
  *
  * The function takes a `difficulty` parameter that can have three values: `easy`
@@ -40,7 +78,7 @@ function randomInteger(min, max) {
  *
  */
 function setDelay(difficulty) {
-  // TODO: Write your code here.
+  // Set the correct return value based on difficulty
   if (difficulty == 'easy'){
     return 1500;
   }
@@ -68,7 +106,7 @@ function setDelay(difficulty) {
  * chooseHole(holes) //> returns one of the 9 holes that you defined
  */
 function chooseHole(holes) {
-  // TODO: Write your code here.
+  // Choose Hole to return 
   let randomNum = randomInteger (0,8);
   const hole = holes[randomNum];
   if (hole === lastHole) {
@@ -99,7 +137,7 @@ function chooseHole(holes) {
 *
 */
 function gameOver() {
-  // TODO: Write your code here
+  // Determine if game is over and return correct timeout or stop game. 
   if (time > 0){
     let timeoutId = showUp();
     return timeoutId;
@@ -120,8 +158,8 @@ function gameOver() {
 *
 */
 function showUp() {
-  let delay = setDelay(difficulty); // TODO: Update so that it uses setDelay()
-  const hole = chooseHole(holes);  // TODO: Update so that it use chooseHole()
+  let delay = setDelay(difficulty); // Use setDelay()
+  const hole = chooseHole(holes);  // Use chooseHole()
   return showAndHide(hole, delay);
 
 }
@@ -135,13 +173,13 @@ function showUp() {
 *
 */
 function showAndHide(hole, delay){
-  // TODO: call the toggleVisibility function so that it adds the 'show' class.
+  // Call the toggleVisibility function so that it adds the 'show' class.
   toggleVisibility(hole);
   const timeoutID = setTimeout(() => {
-    // TODO: call the toggleVisibility function so that it removes the 'show' class when the timer times out.
+    // Call the toggleVisibility function so that it removes the 'show' class when the timer times out.
     toggleVisibility(hole);
     gameOver();
-  }, delay); // TODO: change the setTimeout delay to the one provided as a parameter
+  }, delay); // Change the setTimeout delay to the one provided as a parameter
   return timeoutID;
 }
 
@@ -152,7 +190,7 @@ function showAndHide(hole, delay){
 *
 */
 function toggleVisibility(hole){
-  // TODO: add hole.classList.toggle so that it adds or removes the 'show' class.
+  // Add hole.classList.toggle so that it adds or removes the 'show' class.
   hole.classList.toggle('show');
   return hole;
 }
@@ -168,7 +206,7 @@ function toggleVisibility(hole){
 *
 */
 function updateScore() {
-  // TODO: Write your code here
+  // Update score
   points++;
   score.textContent=points;
   return points;
@@ -182,7 +220,7 @@ function updateScore() {
 *
 */
 function clearScore() {
-  // TODO: Write your code here
+  // Clear score
   points = 0;
   score.textContent = points;
   return points;
@@ -194,8 +232,7 @@ function clearScore() {
 *
 */
 function updateTimer() {
-  // TODO: Write your code here.
-  // hint: this code is provided to you in the instructions.
+  // If Time is not 0, decrement time and continue 
   if (time > 0){
     time -= 1;
     timerDisplay.textContent = time;
@@ -210,7 +247,7 @@ function updateTimer() {
 *
 */
 function startTimer() {
-  // TODO: Write your code here
+  // Set Timer Interval and return to start timer
   timer = setInterval(updateTimer, 1000);
   return timer;  
 }
@@ -224,9 +261,9 @@ function startTimer() {
 *
 */
 function whack(event) {
-  // TODO: Write your code here.
-  // call updateScore()
+  // Call updateScore()
   updateScore();
+  playAudio(audioHit);
   return points;
 }
 
@@ -236,7 +273,6 @@ function whack(event) {
 * for an example on how to set event listeners using a for loop.
 */
 function setEventListeners(){
-  // TODO: Write your code here
   // forEach mole add the whack event handler when a player clicks on the mole.
   // return moles;
   moles.forEach(
@@ -277,6 +313,7 @@ function stopGame(){
 function startGame(){
   clearScore();
   startTimer();
+  playAudio(song);
   setEventListeners();
   setDuration(10);
   showUp();
