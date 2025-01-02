@@ -6,8 +6,10 @@ const score = document.querySelector('#score'); // Use querySelector() to get th
 const timerDisplay = document.querySelector("#timer"); // use querySelector() to get the timer element.
 
 //Audio Files
-const audioHit = new Audio("https://github.com/gabrielsanchez/erddiagram/blob/main/hit.mp3?raw=true");
-const song = new Audio("https://github.com/gabrielsanchez/erddiagram/blob/main/molesong.mp3?raw=true");
+/*const audioHit = new Audio("https://github.com/gabrielsanchez/erddiagram/blob/main/hit.mp3?raw=true");
+const song = new Audio("https://github.com/gabrielsanchez/erddiagram/blob/main/molesong.mp3?raw=true");*/
+const audioHit = new Audio("https://lynmarief.github.io/js-dev-final-capstone-starter-whack-a-mole/assets/cat_meow.wav");
+const song = new Audio("https://lynmarief.github.io/js-dev-final-capstone-starter-whack-a-mole/assets/catsong.wav");
 
 let time = 10;
 let timer;
