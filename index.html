@@ -1,27 +1,34 @@
 <html>
   <head>
+    <!-- link to stylesheet for game -->
     <link rel="stylesheet" href="./src/styles_update.css">
   </head>
   <body>
+    <!--Title for page and warning message to share when scores will be cleared out-->
     <h1 id="title">pet-a-cat</h1>
     <h3>WARNING: Pressing start will reset any prior<br> game progress.  Please manually review & save your score<br> score before starting a new game.</h3>
     <div>
       <div>
+        <!--heading to start play-->
         <h2>Click start to play!</h2>
       </div>
       <div>
+        <!--button to start game-->
         <h2>
           <button id="start">start</button>
         </h2>
       </div>
       <div>
+        <!--current score value for game-->
         <h2>score: <span id="score">0</span></h2>
       </div>
       <div>
+        <!--time remaining within game-->
           <h2><span id="timer">0</span> seconds left.</h2>
       </div>
     </div>
     <div class="grid">
+      <!--moles (cats) and holes (cat beds) to display within the game grid-->
       <div id="hole0" class="hole">
         <div id="mole0" class="mole"></div>
       </div>
@@ -50,6 +57,7 @@
         <div id="mole8" class="mole"></div>
       </div>
     </div>
+    <!--includes javascript file for gameplay-->
     <script src="./src/index_update.js"></script>
   </body>
 </html>
